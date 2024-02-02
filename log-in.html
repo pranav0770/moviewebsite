@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
+    <style>
+        body{
+            text-align: center;
+            background-image: linear-gradient(rgba(10, 10, 10, 0.851),rgba(10, 10, 10, 0.851)), url(./media/background.jpg);
+            background-position: center;
+            background-size: cover;
+            position: relative;
+        }
+        #login{
+            width: 50vh;
+            height: 55vh;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 50px;
+            justify-content: space-evenly;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            border-radius: 10px;
+            background-color: black;
+            margin-top: 150px;
+        }
+        input{
+            height: 40px;
+            border-radius: 5px;
+            border: 1px solid silver;
+            background-color:rgb(52,52,52);
+            color:silver;
+            margin-top: 40px;
+            width: 80%;
+            padding: 0px 20px;
+            font-size: 17px;
+        }
+        
+        
+        p{
+            color: silver;
+        }
+        a{
+            color: red;
+            margin-left:10px;
+        }
+        h1{
+            color: #ffffff;
+        }
+        #sub{
+            width: 30%;
+            background-color:cornflowerblue;
+            color:white;
+            height: 40px;
+            font-weight: 600;
+            transition:0.5s
+        }
+        #sub:hover{
+            width: 32%;
+            height: 42px;
+            background-color:rgb(0, 89, 255);
+            color:white;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="login"> 
+        <h1>Log In</h1>
+            <form action="" autocomplete="on">
+                <input type="text" placeholder="Email" id="email" required><br>
+                <input type="password" placeholder="Password" id="pass" required><br>
+                <input type="submit" value="Log In" id="sub">
+            </form>
+            <p>Don't have an account? <a href="sign-up.html">Sign Up</a></p>
+            <a href="./recoverPassword.html">Forgot Password ?</a>
+        
+    </div>
+    
+</body>
+</html>
+<!-- <script>
+    document.querySelector("#login form").addEventListener("submit",loginfun);
+async function loginfun(event){
+    try {
+        event.preventDefault();
+        let all_login = document.querySelectorAll("#login input");
+        let object= {
+            ["email"]: all_login[0].value,
+            ["password"] : all_login[1].value
+        }
+        console.log(object);
+        let login_req = await fetch("https://639889b9044fa481d6a154f8.mockapi.io/user",{
+            method : "POST",
+            body : JSON.stringify(object),
+            headers : {
+                "Content-Type" : "application/json"
+            }
+        });
+        if(login_req.ok){
+            alert("User has been successfully Logged In");
+            window.location.assign("index.html");
+        }else{
+            alert("user not found.")
+        }
+    } catch (error) {
+        alert("err in login")
+    }
+}
+</script> -->
+<script>
+    let Details=JSON.parse(localStorage.getItem("data")) || [];
+    document.querySelector("#login form").addEventListener("submit",myfun);
+      function myfun(){
+        let email,pass;
+
+        email=document.querySelector("#email").value;
+        pass=document.querySelector("#pass").value;
+             let count=0;
+            Details.forEach(element => {
+
+                if(email==element.em && pass==element.pa){
+                   count++;
+                }
+                
+             });
+             if(count>0){
+                window.location.assign("index.html")
+                alert("✅ LogIn Successful");
+             }else{
+                alert("❌ Wrong Credentials")
+             }
+             document.querySelector("#email").value="";
+             document.querySelector("#pass").value="";
+             }      
+      
+</script>
